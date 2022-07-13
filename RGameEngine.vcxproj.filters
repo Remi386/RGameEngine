@@ -13,5 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{24664a2f-5fc9-44c7-8146-3b96346d08fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DebugLib">
+      <UniqueIdentifier>{91589d13-e654-4c52-b472-4bf214c97f73}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\glUtils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\Timer.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="utils\glUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Timer.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugLib\DebugSymb.h">
+      <Filter>DebugLib</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugLib\GL_Debug.h">
+      <Filter>DebugLib</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -19,30 +19,134 @@
     <Filter Include="DebugLib">
       <UniqueIdentifier>{91589d13-e654-4c52-b472-4bf214c97f73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{b8784f06-2940-4a6d-ba98-a604e4cbebd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{506497e3-4484-4916-8ed9-cd8c59e0fb0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GLSL">
+      <UniqueIdentifier>{52747908-282f-4b13-b44e-49fc5c56463a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{cc6c0ca3-19b7-445c-8141-8c1cd8f50cbd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils\glUtils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
     <ClCompile Include="utils\Timer.cpp">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="Math\vec2.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\vec3.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\mat3.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\mat4.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Mesh.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\VertexArray.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Shader.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Renderer.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\GameActor.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\MeshElement.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\TempActor.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="utils\glUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
     <ClInclude Include="utils\Timer.h">
       <Filter>utils</Filter>
     </ClInclude>
-    <ClInclude Include="DebugLib\DebugSymb.h">
+    <ClInclude Include="DebugLib\DebugOut.h">
       <Filter>DebugLib</Filter>
     </ClInclude>
     <ClInclude Include="DebugLib\GL_Debug.h">
       <Filter>DebugLib</Filter>
     </ClInclude>
+    <ClInclude Include="Math\vec2.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\vec3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\MathFunc.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\mat3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\mat4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\quaterion.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\ObjectID.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\GameActor.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Mesh.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\VertexArray.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Renderer.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Shader.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Math.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\MeshElement.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Element.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\TempActor.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\PriorityVector.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GLSL\CommonShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="GLSL\CommonShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>

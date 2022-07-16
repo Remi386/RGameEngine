@@ -1,4 +1,15 @@
 #include "mat4.h"
+#include "quaterion.h"
+
+static const float IdentityMatrix4[4][4] =
+{
+	{1.0, 0.0, 0.0, 0.0},
+	{0.0, 1.0, 0.0, 0.0},
+	{0.0, 0.0, 1.0, 0.0},
+	{0.0, 0.0, 0.0, 1.0}
+};
+
+const mat4 mat4::IdentityMatrix = mat4(IdentityMatrix4);
 
 mat4 operator*(const mat4& lhs, const mat4& rhs)
 {
@@ -101,5 +112,32 @@ mat4 operator*(const mat4& lhs, const mat4& rhs)
 		lhs.m[3][3] * rhs.m[3][3];
 
 	return resultMatrix;
+}
+
+mat4 CreateFromQuaterion(const quat& q)
+{
+	float mat[4][4];
+
+	mat[0][0] = 1.0f - 2.0f * q.y * q.y - 2.0f * q.z * q.z;
+	mat[0][1] = 2.0f * q.x * q.y + 2.0f * q.w * q.z;
+	mat[0][2] = 2.0f * q.x * q.z - 2.0f * q.w * q.y;
+	mat[0][3] = 0.0f;
+
+	mat[1][0] = 2.0f * q.x * q.y - 2.0f * q.w * q.z;
+	mat[1][1] = 1.0f - 2.0f * q.x * q.x - 2.0f * q.z * q.z;
+	mat[1][2] = 2.0f * q.y * q.z + 2.0f * q.w * q.x;
+	mat[1][3] = 0.0f;
+
+	mat[2][0] = 2.0f * q.x * q.z + 2.0f * q.w * q.y;
+	mat[2][1] = 2.0f * q.y * q.z - 2.0f * q.w * q.x;
+	mat[2][2] = 1.0f - 2.0f * q.x * q.x - 2.0f * q.y * q.y;
+	mat[2][3] = 0.0f;
+
+	mat[3][0] = 0.0f;
+	mat[3][1] = 0.0f;
+	mat[3][2] = 0.0f;
+	mat[3][3] = 1.0f;
+
+	return mat4(mat);
 }
 

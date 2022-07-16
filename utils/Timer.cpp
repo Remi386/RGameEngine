@@ -2,7 +2,7 @@
 #include <chrono>
 using mClock = std::chrono::steady_clock;
 
-constexpr float nanInSec = 0.000'001;
+constexpr float nanInSec = 0.000'001f;
 
 Timer::Timer()
 {
@@ -30,7 +30,7 @@ bool Timer::WaitForFrameEnd()
 float Timer::GetAverage()
 {
 	uint64_t time_diff = frameTimeBuffer[MaxFrameKeep - 1] - frameTimeBuffer[0];
-	float(time_diff) * nanInSec;
+	return float(time_diff) * nanInSec;
 }
 
 uint64_t Timer::GetTimePoint()

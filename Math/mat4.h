@@ -20,6 +20,16 @@ public:
 		return reinterpret_cast<float*>(m);
 	}
 
+	float* operator[](size_t RowIndex)
+	{
+		return m[RowIndex];
+	}
+
+	const float* operator[](size_t RowIndex) const
+	{
+		return m[RowIndex];
+	}
+
 	friend mat4 operator*(const mat4& lhs, const mat4& rhs);
 
 	mat4& operator*=(const mat4& other)
@@ -75,6 +85,8 @@ public:
 		};
 		return mat4(mat);
 	}
+
+	static mat4 CreateFromQuaternion(const class quat& q);
 
 	static mat4 CreateOrthogonal(float width, float height, float near, float far)
 	{

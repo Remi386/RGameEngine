@@ -15,22 +15,29 @@ public:
 		z = z_;
 	}
 
-	constexpr float LengthSqured()
+	constexpr float LengthSqured() const
 	{
 		return x*x + y*y + z*z;
 	}
 
-	constexpr float Length()
+	inline float Length() const
 	{
 		return Math::Sqrt(LengthSqured());
 	}
 
-	constexpr void Normalize()
+	inline void Normalize()
 	{
 		float length = Length();
 		x /= length;
 		y /= length;
 		z /= length;
+	}
+
+	static vec3 Normalized(const vec3& vec)
+	{
+		vec3 tmp = vec;
+		tmp.Normalize();
+		return tmp;
 	}
 
 	static float Dot(const vec3& lhs, const vec3& rhs)

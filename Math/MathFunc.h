@@ -7,44 +7,44 @@ namespace Math {
 	constexpr float Inf = std::numeric_limits<float>::infinity();
 	constexpr float NegInf = -Inf;
 	constexpr float PI = 3.1415927f;
-	constexpr float float_error = 1.0 / 1e6;
+	constexpr float float_error = 1.0f / 1e6f;
 
-	constexpr float Pow(float value, float power)
+	inline float Pow(float value, float power)
 	{
 		return std::powf(value, power);
 	}
 
-	constexpr float Sqrt(float value)
+	inline float Sqrt(float value)
 	{
 		return std::sqrtf(value);
 	}
 
-	constexpr float Cos(float angle)
+	inline float Cos(float angle)
 	{
 		return std::cosf(angle);
 	}
 
-	constexpr float Sin(float angle)
+	inline float Sin(float angle)
 	{
 		return std::sinf(angle);
 	}
 
-	constexpr float Tan(float angle)
+	inline float Tan(float angle)
 	{
 		return std::tanf(angle);
 	}
 
-	constexpr float Cot(float angle)
+	inline float Cot(float angle)
 	{
-		return 1.0 / Tan(angle);
+		return 1.0f / Tan(angle);
 	}
 
-	constexpr float Atan(float angle)
+	inline float Atan(float angle)
 	{
 		return std::atanf(angle);
 	}
 
-	constexpr float Abs(float value)
+	inline float Abs(float value)
 	{
 		return std::fabsf(value);
 	}
@@ -56,12 +56,12 @@ namespace Math {
 
 	constexpr float ToRadians(float angle)
 	{
-		return angle * PI / 180.0;
+		return angle * PI / 180.0f;
 	}
 
 	constexpr float ToDegrees(float angle)
 	{
-		return angle * 180.0 / PI;
+		return angle * 180.0f / PI;
 	}
 
 	constexpr float Lerp(float start, float end, float timePoint)

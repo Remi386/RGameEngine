@@ -14,16 +14,23 @@ public:
 		return x*x + y*y;
 	}
 
-	constexpr float Length()
+	inline float Length()
 	{
 		return Math::Sqrt(LengthSqured());
 	}
 
-	constexpr void Normalize()
+	inline void Normalize()
 	{
 		float length = Length();
 		x /= length;
 		y /= length;
+	}
+
+	static vec2 Normalized(const vec2& vec)
+	{
+		vec2 tmp = vec;
+		tmp.Normalize();
+		return tmp;
 	}
 
 	static float Dot(const vec2& lhs, const vec2& rhs)

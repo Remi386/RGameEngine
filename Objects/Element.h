@@ -5,26 +5,36 @@ class GameActor;
 class Element {
 public:
 
-	/*class ElementComparator {
-	public:
-		bool operator()(Element* lhs, Element* rhs) {
-			return lhs->GetPriority() < rhs->GetPriority();
-		}
-	};*/
-
 	enum class ElementID : int {
-		MeshElement
+		MeshElement,
+		MoveElement
 	};
 
-	Element(GameActor* owner_)
-		: owner(owner_)
+	Element(GameActor* owner_, int priority_ = 100)
+		: owner(owner_), priority(priority_)
 	{}
 
-	//int GetPriority() { return priority; }
+	virtual void Update(float deltaTime) {}
+
+	int GetPriority() const { return priority; }
 
 	virtual ElementID GetType() const = 0;
 
 protected:
 	GameActor* owner;
-	//int priority;
+	int priority;
+};
+
+class ElementLessComparator {
+public:
+	bool operator()(const Element* lhs, const Element* rhs) {
+		return lhs->GetPriority() < rhs->GetPriority();
+	}
+};
+
+class ElementGreaterComparator {
+public:
+	bool operator()(const Element* lhs, const Element* rhs) {
+		return lhs->GetPriority() > rhs->GetPriority();
+	}
 };

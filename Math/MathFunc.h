@@ -49,9 +49,9 @@ namespace Math {
 		return std::fabsf(value);
 	}
 
-	constexpr bool IsZero(float value)
+	inline bool IsZero(float value)
 	{
-		return std::fabs(value) <= float_error ? true : false;
+		return Abs(value) < float_error;
 	}
 
 	constexpr float ToRadians(float angle)
@@ -64,12 +64,13 @@ namespace Math {
 		return angle * 180.0f / PI;
 	}
 
+	inline bool IsFEqual(float first, float second)
+	{
+		return Abs(first - second) < float_error;
+	}
+
 	constexpr float Lerp(float start, float end, float timePoint)
 	{
 		return start + timePoint * (end - start);
 	}
-
-
-
 }
-

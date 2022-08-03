@@ -4,6 +4,7 @@
 #include "../DebugLib/GL_Debug.h"
 #include "SDL2/SDL.h"
 #include "GL/glew.h"
+#include "../Math/mat4.h"
 
 bool Shader::Load(const std::string& vertShader, const std::string& fragShader)
 {
@@ -60,6 +61,7 @@ bool Shader::LoadShader(const std::string& shaderName, uint32_t shaderType, uint
 
 	if (!file.is_open()) {
 		Debug::Out(rIMPORTANT) << "Can not open shader file: " << shaderName << std::endl;
+		return false;
 	}
 
 	size_t length = file.tellg();
@@ -89,6 +91,27 @@ bool Shader::LoadShader(const std::string& shaderName, uint32_t shaderType, uint
 	return true;
 }
 
+void Shader::SetUniformMatrix4(std::string_view matName, const mat4& mat)
+{
+	GLuint loc = glGetUniformLocation(shaderProgramID, matName.data());
+
+	glUniformMatrix4fv(loc, 1, GL_FALSE, mat.GetPointer());
+}
+
+void Shader::SetUniformVector3(std::string_view vecName, const vec3& vec)
+{
+	GLuint loc = glGetUniformLocation(shaderProgramID, vecName.data());
+
+	glUniform3fv(loc, 1, vec.GetPointer());
+}
+
+void Shader::SetUniformFloat(std::string_view floatName, float value)
+{
+	GLuint loc = glGetUniformLocation(shaderProgramID, floatName.data());
+
+	glUniform1f(loc, value);
+}
+
 #ifdef DEBUG_BUILD
 
 bool Shader::ShaderCompiled(uint32_t ShaderID)
@@ -97,7 +120,8 @@ bool Shader::ShaderCompiled(uint32_t ShaderID)
 	glGetShaderiv(ShaderID, GL_COMPILE_STATUS, &vertCompiled);
 
 	if (vertCompiled != 1) {
-		Debug::Out(rCRITICAL) << "shader compilation failed (id = " << ShaderID << ") " << std::endl;
+		Debug::Out(rCRITICAL) << "shader compilation failed (id = " 
+							  << ShaderID << ") " << std::endl;
 
 		int len = 0;
 
@@ -126,7 +150,7 @@ bool Shader::ProgramLinked()
 
 	if (linked != 1) {
 		Debug::Out(rCRITICAL) << "program linking failed (id = "
-			<< shaderProgramID << ") " << std::endl;
+							  << shaderProgramID << ") " << std::endl;
 
 		int len = 0;
 
@@ -153,7 +177,7 @@ bool Shader::ShaderCompiled(uint32_t ShaderID)
 	return true;
 }
 
-bool Shader::bool Shader::ProgramLinked()
+bool Shader::ProgramLinked()
 {
 	return true;
 }

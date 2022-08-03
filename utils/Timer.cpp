@@ -4,9 +4,11 @@ using mClock = std::chrono::steady_clock;
 
 constexpr float nanInSec = 0.000'001f;
 
-Timer::Timer()
+Timer::Timer(FrameRate frameRate)
+	:fRate(frameRate)
 {
-	std::memset(frameTimeBuffer, 0, MaxFrameKeep);
+	size_t timePoint = GetTimePoint();
+	std::fill(&frameTimeBuffer[0], &frameTimeBuffer[MaxFrameKeep], timePoint);
 }
 
 float Timer::GetFrameDifference()
@@ -24,7 +26,7 @@ void Timer::UpdateTimer()
 
 bool Timer::WaitForFrameEnd()
 {
-	return true;
+	return (GetTimePoint() - frameTimeBuffer[MaxFrameKeep - 1] > 1.0f / int(fRate));
 }
 
 float Timer::GetAverage()

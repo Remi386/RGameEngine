@@ -2,6 +2,8 @@
 #include "../DebugLib/DebugOut.h"
 #include <fstream>
 #include <sstream>
+#include <nlohmann/json.hpp>
+#include "../Math/MathFunc.h"
 
 Mesh::Mesh(class Renderer* renderer_)
 {
@@ -13,58 +15,47 @@ Mesh::~Mesh()
 	delete verts;
 }
 
-bool Mesh::LoadMesh(const std::string& fileName)
+bool Mesh::LoadMesh(const std::string& fileName) 
 {
 	std::ifstream file(fileName);
-
+	
 	if (!file.is_open()) {
 		Debug::Out(rCRITICAL) << "Cannot open mesh file: " << fileName << std::endl;
 		return false;
 	}
+	
+	try {
 
-	std::string line;
+		nlohmann::json json;
 
-	std::getline(file, line);
-	VertexArray::VertexType vertType = VertexArray::GetVertexTypeByName(line);
+		file >> json;
 
-	std::vector<float> vertices;
-	std::vector<uint32_t> indices;
+		float version = json.at("version").get<float>();
 
-	while (!file.eof()) {
-
-		char controlChar;
-		std::getline(file, line);
-		std::stringstream sStream(line);
-
-		if (line.empty())
-			continue;
-
-		sStream >> controlChar;
-
-		if (controlChar == '/' || controlChar == ' ')
-			continue;
-
-		if (controlChar == 'v') { //vertex
-			float v[3];
-			sStream >> v[0] >> v[1] >> v[2];
-			vertices.push_back(v[0]);
-			vertices.push_back(v[1]);
-			vertices.push_back(v[2]);
-		}
-		if (controlChar == 'f') //surface
+		if (!Math::IsFEqual(version, 1.0f))
 		{
-			uint32_t ind[3];
-			sStream >> ind[0] >> ind[1] >> ind[2];
-			indices.push_back(ind[0]);
-			indices.push_back(ind[1]);
-			indices.push_back(ind[2]);
+			Debug::Out(rCRITICAL) << "Incompatible versions: game version =" << 1.0
+				<< ", mesh version = " << version << std::endl;
+			return false;
 		}
+
+		std::string vertexName = json.at("meshType").get<std::string>();
+
+		VertexArray::VertexType vertType = VertexArray::GetVertexTypeByName(vertexName);
+
+		std::vector<float> vertices = json.at("vertices").get<std::vector<float>>();
+	
+		std::vector<uint32_t> indices = json.at("indices").get<std::vector<uint32_t>>();
+
+		verts = new VertexArray(vertices.data(), uint32_t(vertices.size()),
+								indices.data(),  uint32_t(indices.size()),
+								vertType);
 
 	}
-
-	verts = new VertexArray(vertices.data(), vertices.size(),
-		indices.data(), indices.size(),
-		vertType);
+	catch (std::exception& e) {
+		Debug::Out(rCRITICAL) << "Error in json reader: " << e.what() << std::endl;
+		return false;
+	}
 
 	return true;
 }

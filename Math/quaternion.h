@@ -75,6 +75,7 @@ public:
 		z = newVec.z;
 
 		w = other.w * w - vec3::Dot(pv, qv);
+		return *this;
 	}
 
 	static quat Concatenate(const quat& q, const quat& p)

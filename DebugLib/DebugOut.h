@@ -63,6 +63,9 @@ namespace Debug {
 
 #else
 
+	inline void setDebugLevel(DebugLVL newDebugLVL)
+	{}
+
 	inline void setDebugOutputStream(std::string streamName, std::ostream& stream)
 	{}
 

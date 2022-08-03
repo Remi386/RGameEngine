@@ -52,9 +52,9 @@ public:
 		return mat3(mat);
 	}
 
-	float* GetPointer()
+	const float* GetPointer() const 
 	{
-		return reinterpret_cast<float*>(m);
+		return reinterpret_cast<const float*>(m);
 	}
 
 	static const mat3 IdentityMatrix;

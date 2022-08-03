@@ -137,7 +137,9 @@
     <ClCompile Include="Math\mat4.cpp" />
     <ClCompile Include="Math\vec2.cpp" />
     <ClCompile Include="Math\vec3.cpp" />
+    <ClCompile Include="Objects\Camera.cpp" />
     <ClCompile Include="Objects\GameActor.cpp" />
+    <ClCompile Include="Objects\MoveElement.cpp" />
     <ClCompile Include="Objects\TempActor.cpp" />
     <ClCompile Include="Render\Mesh.cpp" />
     <ClCompile Include="Render\MeshElement.cpp" />
@@ -154,11 +156,14 @@
     <ClInclude Include="Math\mat4.h" />
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Math\MathFunc.h" />
-    <ClInclude Include="Math\quaterion.h" />
+    <ClInclude Include="Math\quaternion.h" />
     <ClInclude Include="Math\vec2.h" />
     <ClInclude Include="Math\vec3.h" />
+    <ClInclude Include="Math\vec4.h" />
+    <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Element.h" />
     <ClInclude Include="Objects\GameActor.h" />
+    <ClInclude Include="Objects\MoveElement.h" />
     <ClInclude Include="Objects\ObjectID.h" />
     <ClInclude Include="Objects\TempActor.h" />
     <ClInclude Include="Render\Mesh.h" />

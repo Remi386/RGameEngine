@@ -1,8 +1,16 @@
 #version 400
 
-in vec3 position;
+layout (location=0) in vec3 position;
 
-void main()
+uniform mat4 worldTransform;
+uniform mat4 view;
+uniform mat4 proj;
+
+out vec4 mColor;
+
+void main(void) 
 {
-	gl_Position = vec4(position, 1.0);
+    vec4 pos = vec4(position, 1.0);
+    gl_Position = proj * view * worldTransform * pos;
+    mColor = pos * 0.2 + vec4(0.5, 0.5, 0.5, 0.5);
 }

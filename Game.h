@@ -1,5 +1,4 @@
 #pragma once
-//#include "Render/Renderer.h"
 #include "utils/Timer.h"
 #include <vector>
 #include <string_view>
@@ -18,11 +17,13 @@ public:
 	void Loop();
 
 private:
+	bool loadIni(std::string_view iniFile);
+
+	void ProcessInput();
 
 	int ScreenWidth = 800;
 	int ScreenHeight = 600;
 
-	bool loadIni(std::string_view iniFile);
 	std::vector<GameActor*> actors;
 	Renderer* renderer;
 	Timer timer;

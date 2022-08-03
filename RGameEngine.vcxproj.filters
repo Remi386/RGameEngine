@@ -75,6 +75,12 @@
     <ClCompile Include="Objects\TempActor.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\Camera.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\MoveElement.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\Timer.h">
@@ -101,7 +107,7 @@
     <ClInclude Include="Math\mat4.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="Math\quaterion.h">
+    <ClInclude Include="Math\quaternion.h">
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
@@ -139,6 +145,15 @@
     </ClInclude>
     <ClInclude Include="utils\PriorityVector.h">
       <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Camera.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\vec4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\MoveElement.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

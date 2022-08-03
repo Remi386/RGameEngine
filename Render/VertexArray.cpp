@@ -73,9 +73,9 @@ void VertexArray::SpecifyAttributes(VertexType type, uint32_t vertSize)
 	switch (type)
 	{
 	case VertexArray::VertexType::Vert:
-		glEnableVertexAttribArray(0);
-		Debug::checkOpenGLError();
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertSize, 0);
+		Debug::checkOpenGLError();
+		glEnableVertexAttribArray(0);
 		Debug::checkOpenGLError();
 		break;
 	case VertexArray::VertexType::Vert_Text:

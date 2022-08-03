@@ -3,6 +3,7 @@
 #include <vector>
 #include <SDL2/SDL.h>
 #include "Shader.h"
+#include "../Math/mat4.h"
 
 class Game;
 class Mesh;
@@ -21,11 +22,13 @@ public:
 
 	void Draw();
 
+	void SetViewMatrix(const mat4& newViewMat) { viewMat = newViewMat; }
+
 private:
 	void DrawScene();
 
-	Game* game;
-	SDL_Window* sdlWindow;
+	Game* game = nullptr;
+	SDL_Window* sdlWindow = nullptr;
 	SDL_GLContext sdlContext;
 
 	std::unordered_map<std::string, Mesh*> meshes;
@@ -34,4 +37,6 @@ private:
 
 	Shader commonShader;
 
+	mat4 viewMat;
+	mat4 projMat;
 };

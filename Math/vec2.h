@@ -48,9 +48,9 @@ public:
 		return v - 2.0f * Dot(v, n) * n;
 	}
 
-	float* GetPointer()
+	const float* GetPointer() const
 	{
-		return reinterpret_cast<float*>(&x);
+		return reinterpret_cast<const float*>(&x);
 	}
 
 	vec2& operator=(const vec2& other)

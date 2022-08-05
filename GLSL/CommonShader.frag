@@ -1,13 +1,15 @@
 #version 400
 
-in vec4 mColor;
+in vec2 texCoor;
 
 uniform mat4 worldTransform;
-uniform mat4 viewProjection;
+uniform mat4 view;
+uniform mat4 proj;
+
+uniform sampler2D mTexture;
 
 out vec4 color;
 
-void main()
-{
-	color = mColor;
+void main(void) {
+    color = texture(mTexture, texCoor);
 }

@@ -8,6 +8,7 @@
 class Game;
 class Mesh;
 class MeshElement;
+class Texture;
 
 class Renderer {
 public:
@@ -19,6 +20,8 @@ public:
 	void AddMeshElement(MeshElement*);
 
 	Mesh* GetMesh(const std::string& meshName);
+
+	Texture* GetTexture(const std::string& textName);
 
 	void Draw();
 
@@ -32,11 +35,13 @@ private:
 	SDL_GLContext sdlContext;
 
 	std::unordered_map<std::string, Mesh*> meshes;
+	std::unordered_map<std::string, Texture*> textures;
 
 	std::vector<MeshElement*> meshElements;
 
-	Shader commonShader;
+	Shader shader;
 
 	mat4 viewMat;
 	mat4 projMat;
+
 };

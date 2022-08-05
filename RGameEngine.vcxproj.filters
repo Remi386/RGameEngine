@@ -81,6 +81,9 @@
     <ClCompile Include="Objects\MoveElement.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Render\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\Timer.h">
@@ -155,12 +158,21 @@
     <ClInclude Include="Objects\MoveElement.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Render\Texture.h">
+      <Filter>Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GLSL\CommonShader.vert">
       <Filter>GLSL</Filter>
     </None>
     <None Include="GLSL\CommonShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="GLSL\PhongShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="GLSL\PhongShader.vert">
       <Filter>GLSL</Filter>
     </None>
   </ItemGroup>

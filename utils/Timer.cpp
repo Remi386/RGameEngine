@@ -2,18 +2,19 @@
 #include <chrono>
 using mClock = std::chrono::steady_clock;
 
-constexpr float nanInSec = 0.000'001f;
+constexpr float nanInSec = 1.0E-9f;
 
 Timer::Timer(FrameRate frameRate)
 	:fRate(frameRate)
 {
-	size_t timePoint = GetTimePoint();
+	uint64_t timePoint = GetTimePoint();
 	std::fill(&frameTimeBuffer[0], &frameTimeBuffer[MaxFrameKeep], timePoint);
 }
 
 float Timer::GetFrameDifference()
 {
-	return float(frameTimeBuffer[MaxFrameKeep - 1] - frameTimeBuffer[MaxFrameKeep - 2]);
+	return time_scale * nanInSec * 
+		   float(frameTimeBuffer[MaxFrameKeep - 1] - frameTimeBuffer[MaxFrameKeep - 2]);
 }
 
 void Timer::UpdateTimer()
@@ -26,14 +27,14 @@ void Timer::UpdateTimer()
 
 bool Timer::WaitForFrameEnd()
 {
-	return (GetTimePoint() - frameTimeBuffer[MaxFrameKeep - 1] > 1.0f / int(fRate));
+	return !(GetTimePoint() - frameTimeBuffer[MaxFrameKeep - 1] > 1.0f / int(fRate));
 }
 
-float Timer::GetAverage()
-{
-	uint64_t time_diff = frameTimeBuffer[MaxFrameKeep - 1] - frameTimeBuffer[0];
-	return float(time_diff) * nanInSec;
-}
+//float Timer::GetAverage()
+//{
+//	uint64_t time_diff = frameTimeBuffer[MaxFrameKeep - 1] - frameTimeBuffer[0];
+//	return float(time_diff) * nanInSec;
+//}
 
 uint64_t Timer::GetTimePoint()
 {

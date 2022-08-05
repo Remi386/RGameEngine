@@ -1,20 +1,30 @@
 #pragma once
-#include "VertexArray.h"
+//#include "VertexArray.h"
 #include <string>
+
+class VertexArray;
+class Texture;
 
 class Mesh {
 public:
 
 	Mesh(class Renderer* renderer);
 
-	bool LoadMesh(const std::string& fileName);
-
 	VertexArray* const GetVertexArray() const { return verts; }
 
+	Texture* GetTexture() { return texture; }
+
 	~Mesh();
+
+protected:
+
+	bool LoadMesh(const std::string& fileName);
 
 private:
 
 	class Renderer* renderer = nullptr;
 	VertexArray* verts = nullptr;
+	Texture* texture = nullptr;
+
+	friend Renderer;
 };

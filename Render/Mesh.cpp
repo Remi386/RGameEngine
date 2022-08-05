@@ -4,6 +4,8 @@
 #include <sstream>
 #include <nlohmann/json.hpp>
 #include "../Math/MathFunc.h"
+#include "VertexArray.h"
+#include "Renderer.h"
 
 Mesh::Mesh(class Renderer* renderer_)
 {
@@ -46,6 +48,10 @@ bool Mesh::LoadMesh(const std::string& fileName)
 		std::vector<float> vertices = json.at("vertices").get<std::vector<float>>();
 	
 		std::vector<uint32_t> indices = json.at("indices").get<std::vector<uint32_t>>();
+
+		std::string textureName = json.at("texture");
+
+		texture = renderer->GetTexture(textureName);
 
 		verts = new VertexArray(vertices.data(), uint32_t(vertices.size()),
 								indices.data(),  uint32_t(indices.size()),

@@ -5,6 +5,8 @@
 #include "../Game.h"
 #include "../Objects/GameActor.h"
 #include "Renderer.h"
+#include "VertexArray.h"
+#include "Texture.h"
 
 MeshElement::MeshElement(GameActor* owner_)
 	:Element(owner_), visible(false), mesh(nullptr)
@@ -22,7 +24,9 @@ void MeshElement::Draw(Shader* shader)
 	shader->SetUniformMatrix4("worldTransform", owner->WorldTransform());
 
 	VertexArray* const v = mesh->GetVertexArray();
+	v->SetActive();
+
+	mesh->GetTexture()->SetActive();
 
 	glDrawElements(GL_TRIANGLES, v->GetIndicesSize(), GL_UNSIGNED_INT, nullptr);
-	//glDrawArrays(GL_TRIANGLES, 0, v->GetIndicesSize());
 }

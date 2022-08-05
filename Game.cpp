@@ -1,7 +1,8 @@
 #include "Game.h"
 #include <fstream>
 #include <sstream>
-#include "SDL2/SDL.h"
+#include <filesystem>
+#include <SDL2/SDL.h>
 #include "Objects/GameActor.h"
 #include "DebugLib/DebugOut.h"
 #include "Objects/TempActor.h"
@@ -13,6 +14,9 @@ Game::Game(std::string_view iniFile /* = game.ini*/)
 	:timer(Timer::FrameRate::FPS30)
 {
 	loadIni(iniFile);
+	int ScreenWidth = std::stoi((*settings.find("ScreenWidth")).second);
+	int ScreenHeight = std::stoi((*settings.find("ScreenHeight")).second);
+
 	renderer = new Renderer(this, ScreenWidth, ScreenHeight);
 
 	auto tmpActor = new TempActor(this);
@@ -22,6 +26,10 @@ Game::Game(std::string_view iniFile /* = game.ini*/)
 	tmpActor->AddElement(mesh);
 	tmpActor->SetPosition(vec3(0.0f, 0.0f, 5.0f));
 	tmpActor->SetScale(3.0f);
+
+	quat rotation(vec3(0.0, 1.0, 0.0), Math::ToRadians(45.0));
+	rotation *= quat(vec3(1.0, 0.0, 0.0), -Math::ToRadians(30.0));
+	tmpActor->SetRotation(rotation);
 
 	auto camera = new Camera(this);
 
@@ -40,8 +48,8 @@ void Game::Loop()
 
 	while (running) 
 	{
-		//timer.UpdateTimer();
-		float deltaTime = 0.013f;
+		timer.UpdateTimer();
+		float deltaTime = timer.GetFrameDifference();
 		SDL_Event even;
 
 		while (SDL_PollEvent(&even)) {
@@ -57,8 +65,10 @@ void Game::Loop()
 		}
 
 		renderer->Draw();
-	}
 
+		while (timer.WaitForFrameEnd())
+		{}
+	}
 }
 
 void Game::ProcessInput()
@@ -70,7 +80,6 @@ void Game::ProcessInput()
 	}
 }
 
-// Needs to be replaced by associative containers
 bool Game::loadIni(std::string_view iniFile)
 {
 	Debug::setDebugLevel(rSPAM);
@@ -88,33 +97,57 @@ bool Game::loadIni(std::string_view iniFile)
 		std::string line;
 		std::getline(inFile, line);
 
+		if (line.empty() || line[0] == '[' || line[0] == ' ')
+			continue;
+
 		std::stringstream sStream(std::move(line));
 		sStream >> propert;
 
-		float value = 0;
 		char equalChar;
-		if(propert[0] != '[' && propert[0] != ' ')
-			sStream >> equalChar >> value;
+		sStream >> equalChar;
+		while (!sStream.eof())
+		{
+			std::string value;
+			sStream >> value;
+			settings.emplace(propert, value);
+		}
 
-		if (propert == "ScreenWidth") {
-			ScreenWidth = int(value);
+		auto width = settings.find("ScreenWidth");
+		if (width == settings.end())
+		{
+			settings.emplace("ScreenWidth", "800");
 		}
 		
-		if (propert == "ScreenHeight") {
-			ScreenHeight = int(value);
+		auto height = settings.find("ScreenHeight");
+		if (height == settings.end())
+		{
+			settings.emplace("ScreenHeight", "600");
 		}
 
-		if (propert == "VerboseLevel") {
-			if (int(value) < int(rCRITICAL) || int(value) > int(rSPAM)) {
-				Debug::Out(rCOMMON) << "VerboseLevel value should be between" << int(rCRITICAL)
-									<< " and " << int(rSPAM) << std::endl;
-			}
-			else {
-				Debug::setDebugLevel(DebugLVL(value));
-			}
-		}
+		settings.emplace("ResourceFolders", "");
 
 	}
 
 	return true;
+}
+
+std::string Game::FindFile(const std::string& fileName)
+{
+	namespace fs = std::filesystem;
+
+	auto iter = std::find_if(settings.find("ResourceFolders"), settings.end(),
+		[&fileName](const auto& pair)
+		{
+			fs::path path = (pair.second.empty() ? "" : pair.second + "/") + fileName;
+
+			return fs::exists(path);
+		});
+
+	if (iter == settings.end())
+		return std::string();
+
+	return 
+		fs::absolute(
+			fs::path((iter->second.empty() ? "" : iter->second + "/") + fileName)
+		).string();
 }

@@ -145,6 +145,7 @@
     <ClCompile Include="Render\MeshElement.cpp" />
     <ClCompile Include="Render\Renderer.cpp" />
     <ClCompile Include="Render\Shader.cpp" />
+    <ClCompile Include="Render\Texture.cpp" />
     <ClCompile Include="Render\VertexArray.cpp" />
     <ClCompile Include="utils\Timer.cpp" />
   </ItemGroup>
@@ -170,6 +171,7 @@
     <ClInclude Include="Render\MeshElement.h" />
     <ClInclude Include="Render\Renderer.h" />
     <ClInclude Include="Render\Shader.h" />
+    <ClInclude Include="Render\Texture.h" />
     <ClInclude Include="Render\VertexArray.h" />
     <ClInclude Include="utils\PriorityVector.h" />
     <ClInclude Include="utils\Timer.h" />
@@ -177,6 +179,8 @@
   <ItemGroup>
     <None Include="GLSL\CommonShader.frag" />
     <None Include="GLSL\CommonShader.vert" />
+    <None Include="GLSL\PhongShader.frag" />
+    <None Include="GLSL\PhongShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

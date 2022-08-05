@@ -44,14 +44,15 @@ namespace Debug {
 	}
 
 	/// <summary>
-	/// Macro for debug output
+	/// Stream for debug output
 	/// </summary>
 	/// <param name="int">argument controls the level of output information</param>
+	/// <param name="string">StreamName specifies output stream, cout by default</param>
 	inline std::ostream& Out(DebugLVL VerboseLevel, std::string StreamName = "")
 	{
 		assertm(int8_t(VerboseLevel) <= int8_t(DebugLVL::rSPAM) &&
 			    int8_t(VerboseLevel) >= int8_t(DebugLVL::rCRITICAL),
-			   "Argument 'VerboseLevel' should be between rCRITICAL and rSPAM DebugLVL enum");
+			    "Argument 'VerboseLevel' should be between rCRITICAL and rSPAM DebugLVL enum");
 
 		if (int8_t(VerboseLevel) > int8_t(VERBOSE_LEVEL))
 			return NullStream;

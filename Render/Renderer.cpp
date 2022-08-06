@@ -78,7 +78,7 @@ Renderer::Renderer(Game* game_, int ScreenWidth_, int ScreenHeight_)
 	viewMat = mat4::CreateLookAt(vec3::Zero, vec3::UnitZ, vec3::UnitY);
 
 	projMat = mat4::CreatePerspective(Math::ToRadians(90.0f), float(ScreenWidth_),
-		float(ScreenHeight_), 1.0f, 1000.f);
+									  float(ScreenHeight_), 0.1f, 10000.f);
 
 	shader.SetActive();
 	shader.SetUniformMatrix4("viewProjection", projMat * viewMat);
@@ -151,6 +151,9 @@ void Renderer::Draw()
 	glDepthFunc(GL_LEQUAL);
 
 	shader.SetActive();
+
+	vec3 cameraDirection = mat4::Inversed(viewMat).GetTranslation();
+	shader.SetUniformVector3("cameraPosition", cameraDirection);
 	shader.SetUniformMatrix4("view", viewMat);
 	shader.SetUniformMatrix4("proj", projMat);
 

@@ -36,9 +36,11 @@ public:
 
 	vec3 GetPosition() const { return position; }
 
-	vec3 GetForward() const { return vec3::Transform(vec3::UnitX, rotation); }
+	vec3 GetForward() const { return vec3::Transform(vec3::UnitZ, rotation); }
 
 private:
+
+	void UpdateElements(float deltaTime);
 
 	void UpdateWorldTransform(float);
 

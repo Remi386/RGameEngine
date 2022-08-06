@@ -6,6 +6,11 @@ inline constexpr int MaxFrameKeep = 30;
 class Timer {
 public:
 	enum class FrameRate : int {
+		Unlimited,
+		FPS5 = 5,
+		FPS10 = 10,
+		FPS15 = 15,
+		FPS24 = 24,
 		FPS30 = 30,
 		FPS50 = 50,
 		FPS60 = 60

@@ -1,5 +1,6 @@
 #include "vec3.h"
 #include "quaternion.h"
+#include <iostream>
 
 const vec3 vec3::Zero = vec3(0.0, 0.0, 0.0);
 
@@ -23,11 +24,19 @@ vec3 vec3::Transform(const vec3& vec, const mat4& mat, float w /* = 1.0*/)
 {
 	vec3 retVal;
 	retVal.x = vec.x * mat[0][0] + vec.y * mat[1][0] +
-		vec.z * mat[2][0] + w * mat[3][0];
+			   vec.z * mat[2][0] + w * mat[3][0];
+
 	retVal.y = vec.x * mat[0][1] + vec.y * mat[1][1] +
-		vec.z * mat[2][1] + w * mat[3][1];
+			   vec.z * mat[2][1] + w * mat[3][1];
+
 	retVal.z = vec.x * mat[0][2] + vec.y * mat[1][2] +
-		vec.z * mat[2][2] + w * mat[3][2];
+			   vec.z * mat[2][2] + w * mat[3][2];
 
 	return retVal;
+}
+
+std::ostream& operator<<(std::ostream& stream, const vec3& vec)
+{
+	stream << " vec3 (x = " << vec.x << ", y = " << vec.y << ", z = " << vec.z << ")\n";
+	return stream;
 }

@@ -27,7 +27,8 @@ void Timer::UpdateTimer()
 
 bool Timer::WaitForFrameEnd()
 {
-	return !(GetTimePoint() - frameTimeBuffer[MaxFrameKeep - 1] > 1.0f / int(fRate));
+	return (float(GetTimePoint() - frameTimeBuffer[MaxFrameKeep - 1]) * nanInSec)
+			< (1.0f / float(fRate));
 }
 
 //float Timer::GetAverage()

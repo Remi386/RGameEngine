@@ -10,9 +10,7 @@ public:
 		MoveElement
 	};
 
-	Element(GameActor* owner_, int priority_ = 100)
-		: owner(owner_), priority(priority_)
-	{}
+	Element(GameActor* owner_, int priority_ = 100);
 
 	virtual void Update(float deltaTime) {}
 

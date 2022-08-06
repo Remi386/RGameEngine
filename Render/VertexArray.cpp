@@ -12,28 +12,28 @@ VertexArray::VertexArray(const void* vertData, uint32_t vertCount,
 
 	//Vertex array
 	glGenVertexArrays(1, &VertexArrayID);
-	Debug::checkOpenGLError();
+	GLDebug::CheckOpenGLError();
 
 	glBindVertexArray(VertexArrayID);
-	Debug::checkOpenGLError();
+	GLDebug::CheckOpenGLError();
 
 	uint32_t vertSize = GetVertexSizeByType(vertType);
 
 	//Vertex buffer
 	glGenBuffers(1, &VertexBufferID);
-	Debug::checkOpenGLError();
+	GLDebug::CheckOpenGLError();
 	glBindBuffer(GL_ARRAY_BUFFER, VertexBufferID);
-	Debug::checkOpenGLError();
+	GLDebug::CheckOpenGLError();
 	glBufferData(GL_ARRAY_BUFFER, vertCount * vertSize, vertData, GL_STATIC_DRAW);
-	Debug::checkOpenGLError();
+	GLDebug::CheckOpenGLError();
 
 	//Index buffer
 	glGenBuffers(1, &IndexBufferID);
-	Debug::checkOpenGLError();
+	GLDebug::CheckOpenGLError();
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBufferID);
-	Debug::checkOpenGLError();
+	GLDebug::CheckOpenGLError();
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesCount * sizeof(uint32_t), indicesData, GL_STATIC_DRAW);
-	Debug::checkOpenGLError();
+	GLDebug::CheckOpenGLError();
 
 	SpecifyAttributes(vertType, vertSize);
 }
@@ -74,9 +74,9 @@ void VertexArray::SpecifyAttributes(VertexType type, uint32_t vertSize)
 	{
 	case VertexArray::VertexType::Vert:
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertSize, 0);
-		Debug::checkOpenGLError();
+		GLDebug::CheckOpenGLError();
 		glEnableVertexAttribArray(0);
-		Debug::checkOpenGLError();
+		GLDebug::CheckOpenGLError();
 		break;
 	case VertexArray::VertexType::Vert_Text:
 		glEnableVertexAttribArray(0);

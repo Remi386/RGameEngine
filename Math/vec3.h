@@ -1,5 +1,6 @@
 #pragma once
 #include "MathFunc.h"
+#include <iosfwd>
 
 class quat;
 class mat4;
@@ -11,12 +12,9 @@ public:
 	float y;
 	float z;
 
-	constexpr vec3(float x_ = 0.0, float y_ = 0.0, float z_ = 0.0)
-	{
-		x = x_;
-		y = y_;
-		z = z_;
-	}
+	explicit constexpr vec3(float x_ = 0.0, float y_ = 0.0, float z_ = 0.0)
+		:x(x_), y(y_), z(z_)
+	{}
 
 	const float* GetPointer() const
 	{
@@ -132,6 +130,8 @@ public:
 	{
 		return vec3(lhs.x / rhs.x, lhs.y / rhs.y, lhs.z / rhs.z);
 	}
+
+	friend std::ostream& operator<<(std::ostream& stream, const vec3& vec);
 
 	static const vec3 Zero;
 

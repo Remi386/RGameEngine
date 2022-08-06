@@ -12,7 +12,7 @@ void MoveElement::Update(float deltaTime)
 		quat rot = owner->GetRotation();
 
 		float angle = angularSpeed * deltaTime;
-		quat inc(vec3::UnitZ, angle);
+		quat inc(vec3::UnitY, angle);
 
 		rot *= inc;
 		owner->SetRotation(rot);

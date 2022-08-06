@@ -135,9 +135,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Math\mat3.cpp" />
     <ClCompile Include="Math\mat4.cpp" />
+    <ClCompile Include="Math\quaternion.cpp" />
     <ClCompile Include="Math\vec2.cpp" />
     <ClCompile Include="Math\vec3.cpp" />
     <ClCompile Include="Objects\Camera.cpp" />
+    <ClCompile Include="Objects\Element.cpp" />
     <ClCompile Include="Objects\GameActor.cpp" />
     <ClCompile Include="Objects\MoveElement.cpp" />
     <ClCompile Include="Objects\TempActor.cpp" />

@@ -1,13 +1,13 @@
 #pragma once
 #include "MathFunc.h"
+#include <iosfwd>
 
 class vec2 {
 public:
 
 	explicit constexpr vec2(float x_ = 0.0, float y_ = 0.0)
-	{
-		x = x_; y = y_;
-	}
+		:x(x_), y(y_)
+	{}
 
 	constexpr float LengthSqured()
 	{
@@ -117,6 +117,8 @@ public:
 	{
 		return vec2(lhs.x / rhs.x, lhs.x / rhs.x);
 	}
+
+	friend std::ostream& operator<<(std::ostream& stream, const vec2& vec);
 
 	static const vec2 Zero;
 

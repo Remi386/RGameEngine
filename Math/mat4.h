@@ -1,8 +1,9 @@
 #pragma once
 #include "MathFunc.h"
+#include "vec3.h"
+#include <iosfwd>
 
 class quat;
-class vec3;
 class vec4;
 
 class mat4 {
@@ -67,6 +68,11 @@ public:
 	{
 		*this = *this * other;
 		return *this;
+	}
+
+	vec3 GetTranslation()
+	{
+		return vec3(m[3][0], m[3][1], m[3][2]);
 	}
 
 	static mat4 CreateScale(float scaleX, float scaleY, float scaleZ)
@@ -163,6 +169,8 @@ public:
 		};
 		return mat4(mat);
 	}
+
+	friend std::ostream& operator<<(std::ostream& stream, const mat4& vec);
 
 	static mat4 CreateLookAt(const vec3& eye, const vec3& target, const vec3& up);
 

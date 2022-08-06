@@ -1,5 +1,6 @@
 #include "GameActor.h"
 #include "Element.h"
+#include "../DebugLib/DebugOut.h"
 
 GameActor::GameActor(Game* game_)
 	:game(game_)
@@ -17,8 +18,16 @@ void GameActor::RemoveElement(Element* elem)
 
 void GameActor::Update(float deltaTime)
 {
-	UpdateWorldTransform(deltaTime);
+	UpdateElements(deltaTime);
 	UpdateActor(deltaTime);
+	UpdateWorldTransform(deltaTime);
+}
+
+void GameActor::UpdateElements(float deltaTime)
+{
+	for (auto elem : elements) {
+		elem->Update(deltaTime);
+	}
 }
 
 void GameActor::UpdateWorldTransform(float deltaTime)
@@ -29,6 +38,11 @@ void GameActor::UpdateWorldTransform(float deltaTime)
 		wrldTrans *= mat4::CreateScale(scale);
 		wrldTrans *= mat4::CreateTranslation(position);
 		worldTransform = wrldTrans;
+
+		Debug::Out(rSPAM) << "Position: " << position << std::endl;
+		Debug::Out(rSPAM) << "Rotation: " << rotation << std::endl;
+		Debug::Out(rSPAM) << "Look at position: " << GetForward() * 100 << std::endl;
+
 		updateWorldTransform = false;
 	}
 }

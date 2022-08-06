@@ -84,6 +84,12 @@
     <ClCompile Include="Render\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\Element.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\quaternion.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\Timer.h">

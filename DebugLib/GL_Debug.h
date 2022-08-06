@@ -5,9 +5,9 @@
 
 #ifdef DEBUG_BUILD
 
-namespace Debug {
+namespace GLDebug {
 
-	inline bool checkOpenGLError()
+	inline bool CheckOpenGLError()
 	{
 		bool foundError = false;
 		int glErr = glGetError();
@@ -19,15 +19,12 @@ namespace Debug {
 		}
 		return foundError;
 	}
-}
 
 #else
 
-namespace Debug {
-
-	inline bool checkOpenGLError()
+	inline bool CheckOpenGLError()
 	{
 		return false;
 	}
-}
 #endif // DEBUG_BUILD
+}

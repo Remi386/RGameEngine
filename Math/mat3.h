@@ -1,5 +1,6 @@
 #pragma once
 #include "MathFunc.h"
+#include <iosfwd>
 
 class mat3 {
 public:
@@ -13,6 +14,16 @@ public:
 	mat3(const float otherMat[3][3])
 	{
 		std::memcpy(m, otherMat, sizeof(float) * 9);
+	}
+
+	float* operator[](size_t RowIndex)
+	{
+		return m[RowIndex];
+	}
+
+	const float* operator[](size_t RowIndex) const
+	{
+		return m[RowIndex];
 	}
 
 	static mat3 CreateScale(float scaleX, float scaleY)
@@ -56,6 +67,8 @@ public:
 	{
 		return reinterpret_cast<const float*>(m);
 	}
+
+	friend std::ostream& operator<<(std::ostream& stream, const mat3& mat);
 
 	static const mat3 IdentityMatrix;
 

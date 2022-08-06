@@ -9,6 +9,8 @@
 
 #define assertm(exp, msg) assert(((void)msg, exp))
 
+class Game;
+
 enum DebugLVL : int8_t {
 	rCRITICAL = 0,
 	rIMPORTANT,
@@ -18,26 +20,30 @@ enum DebugLVL : int8_t {
 	rSPAM
 };
 
-inline DebugLVL VERBOSE_LEVEL = DebugLVL::rCRITICAL;
+class Debug {
 
-namespace Debug {
+	friend Game;
+
+private:
+	static inline DebugLVL VERBOSE_LEVEL = DebugLVL::rCRITICAL;
 
 #ifdef DEBUG_BUILD
 
-	inline std::ostream NullStream(nullptr);
-	inline std::unordered_map<std::string, std::ostream*> debugStreams;
+	static inline std::ostream NullStream = std::ostream(nullptr);
+	static inline std::unordered_map<std::string, std::ostream*> debugStreams;
 
 	/// <summary>
-	/// SHOULD NOT CALL (Game class calls it in Init method)
+	/// (Game class calls it in Init method)
 	/// To specify verbose level change game.ini file
 	/// </summary>
 	/// <param name="newDebugLVL"></param>
-	inline void setDebugLevel(DebugLVL newDebugLVL)
+	static void setDebugLevel(DebugLVL newDebugLVL)
 	{
 		VERBOSE_LEVEL = newDebugLVL;
 	}
 
-	inline void setDebugOutputStream(std::string streamName, std::ostream& stream)
+public:
+	static void setDebugOutputStream(const std::string& streamName, std::ostream& stream)
 	{
 		if (!debugStreams.contains(streamName))
 			debugStreams[streamName] = &stream;
@@ -48,7 +54,7 @@ namespace Debug {
 	/// </summary>
 	/// <param name="int">argument controls the level of output information</param>
 	/// <param name="string">StreamName specifies output stream, cout by default</param>
-	inline std::ostream& Out(DebugLVL VerboseLevel, std::string StreamName = "")
+	static std::ostream& Out(DebugLVL VerboseLevel, const std::string& StreamName = "")
 	{
 		assertm(int8_t(VerboseLevel) <= int8_t(DebugLVL::rSPAM) &&
 			    int8_t(VerboseLevel) >= int8_t(DebugLVL::rCRITICAL),
@@ -62,12 +68,25 @@ namespace Debug {
 			return std::cout;
 	}
 
+	static void Assert(bool condition, DebugLVL VerboseLevel,
+					   std::string_view message, const std::string& StreamName = "", 
+					   int error_code = 0)
+	{
+		if (!condition) {
+			Debug::Out(VerboseLevel, StreamName) << message << std::endl;
+			if (error_code != 0) {
+				std::exit(error_code);
+			}
+		}
+	}
+
 #else
 
-	inline void setDebugLevel(DebugLVL newDebugLVL)
+	static void setDebugLevel(DebugLVL newDebugLVL)
 	{}
 
-	inline void setDebugOutputStream(std::string streamName, std::ostream& stream)
+public:
+	static void setDebugOutputStream(const std::string& streamName, std::ostream& stream)
 	{}
 
 	class RNullDebug
@@ -81,11 +100,16 @@ namespace Debug {
 
 	};
 
-	inline RNullDebug Out(int VerboseLevel, std::string StreamName = "")
+	static RNullDebug Out(int VerboseLevel, const std::string& StreamName = "")
 	{
 		return RNullDebug();
 	}
 
+	static void Assert(bool condition, DebugLVL VerboseLevel,
+					   string_view message, const std::string& StreamName = "",
+					   int error_code = 0)
+	{}
+
 #endif // DEBUG_BUILD
 
-} //DebugNS
+}; //Debug

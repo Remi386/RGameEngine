@@ -16,16 +16,16 @@ bool Shader::Load(const std::string& vertShader, const std::string& fragShader)
 	}
 
 	shaderProgramID = glCreateProgram();
-	Debug::checkOpenGLError();
+	GLDebug::CheckOpenGLError();
 
 	glAttachShader(shaderProgramID, vertexShaderID);
-	Debug::checkOpenGLError();
+	GLDebug::CheckOpenGLError();
 
 	glAttachShader(shaderProgramID, fragmentShaderID);
-	Debug::checkOpenGLError();
+	GLDebug::CheckOpenGLError();
 
 	glLinkProgram(shaderProgramID);
-	Debug::checkOpenGLError();
+	GLDebug::CheckOpenGLError();
 
 	if (!ProgramLinked())
 	{
@@ -73,18 +73,18 @@ bool Shader::LoadShader(const std::string& shaderName, uint32_t shaderType, uint
 	const char* contentPointer = content.c_str();
 
 	outID = glCreateShader(shaderType);
-	Debug::checkOpenGLError();
+	GLDebug::CheckOpenGLError();
 
 	glShaderSource(outID, 1, &contentPointer, nullptr);
-	Debug::checkOpenGLError();
+	GLDebug::CheckOpenGLError();
 
 	glCompileShader(outID);
-	Debug::checkOpenGLError();
-	
+	GLDebug::CheckOpenGLError();
+
 	if (!ShaderCompiled(outID))
 	{
-		Debug::Out(rIMPORTANT) << "compilation of shader " 
-							   << shaderName << " failed" << std::endl;
+		Debug::Out(rIMPORTANT) << "compilation of shader "
+			<< shaderName << " failed" << std::endl;
 		return false;
 	}
 
@@ -93,23 +93,34 @@ bool Shader::LoadShader(const std::string& shaderName, uint32_t shaderType, uint
 
 void Shader::SetUniformMatrix4(std::string_view matName, const mat4& mat)
 {
-	GLuint loc = glGetUniformLocation(shaderProgramID, matName.data());
-
+	GLuint loc = GetUniformLocation(matName);
+	
 	glUniformMatrix4fv(loc, 1, GL_FALSE, mat.GetPointer());
 }
 
 void Shader::SetUniformVector3(std::string_view vecName, const vec3& vec)
 {
-	GLuint loc = glGetUniformLocation(shaderProgramID, vecName.data());
+	GLuint loc = GetUniformLocation(vecName);
 
 	glUniform3fv(loc, 1, vec.GetPointer());
 }
 
 void Shader::SetUniformFloat(std::string_view floatName, float value)
 {
-	GLuint loc = glGetUniformLocation(shaderProgramID, floatName.data());
+	GLuint loc = GetUniformLocation(floatName);
 
 	glUniform1f(loc, value);
+}
+
+GLuint Shader::GetUniformLocation(std::string_view uniName)
+{
+	GLuint loc = glGetUniformLocation(shaderProgramID, uniName.data());
+
+	GLDebug::CheckOpenGLError();
+	Debug::Assert(loc != uintMax, rIMPORTANT,
+				  "Cant get uniform variable location: " + std::string(uniName));
+
+	return loc;
 }
 
 #ifdef DEBUG_BUILD

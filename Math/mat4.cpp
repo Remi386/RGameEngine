@@ -2,6 +2,8 @@
 #include "vec3.h"
 #include "quaternion.h"
 #include "vec4.h"
+#include <iostream>
+#include <iomanip>
 
 mat4::mat4(const vec4& column1, const vec4& column2, const vec4& column3, const vec4& column4)
 {
@@ -268,4 +270,16 @@ mat4 mat4::Inversed(const mat4& m)
 	mat4 tmp = m;
 	tmp.Inverse();
 	return tmp;
+}
+
+std::ostream& operator<<(std::ostream& stream, const mat4& mat)
+{
+	for (int i = 0; i < 4; ++i) {
+		for (int j = 0; j < 4; ++j) {
+			std::cout << std::setw(8) << mat[i][j] << " ";
+		}
+		std::cout << "\n";
+	}
+	std::cout << std::endl;
+	return stream;
 }

@@ -7,7 +7,7 @@ public:
 
 	virtual void Update(float deltaTime) override;
 
-	virtual ElementID GetType() const override { return ElementID::MoveElement; }
+	virtual ElementType GetType() const override { return ElementType::MoveElement; }
 
 	void SetAngularSpeed(float speed) { angularSpeed = speed; };
 	

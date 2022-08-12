@@ -6,11 +6,14 @@
 #include "../utils/PriorityVector.h"
 
 class Game;
+struct InputState;
 
 class GameActor {
 public:
 
 	GameActor(Game* game_);
+	
+	~GameActor();
 
 	Game* GetGame() { return game; }
 
@@ -26,11 +29,15 @@ public:
 	
 	virtual void UpdateActor(float deltaTime) {};
 
-	void AddElement(Element* elem);
+	void ProcessInput(const InputState& inputState);
 	
+	virtual void ProcessActorInput(const InputState& inputState) {}
+
+	void AddElement(Element* elem);
+
 	void RemoveElement(Element* elem);
 
-	virtual void ProcessInput(const uint8_t* keyState) {};
+	Element* GetElementByType(Element::ElementType elemType);
 
 	quat GetRotation() const { return rotation; }
 

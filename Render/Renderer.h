@@ -27,7 +27,10 @@ public:
 
 	void SetViewMatrix(const mat4& newViewMat) { viewMat = newViewMat; }
 
+	void OnWindowResize(uint32_t newWidth, uint32_t newHeight);
+
 private:
+
 	void DrawScene();
 
 	Game* game = nullptr;
@@ -43,5 +46,4 @@ private:
 
 	mat4 viewMat;
 	mat4 projMat;
-
 };

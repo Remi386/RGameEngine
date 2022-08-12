@@ -25,7 +25,7 @@ class Debug {
 	friend Game;
 
 private:
-	static inline DebugLVL VERBOSE_LEVEL = DebugLVL::rCRITICAL;
+	static inline DebugLVL VERBOSE_LEVEL = DebugLVL::rSPAM;
 
 #ifdef DEBUG_BUILD
 

@@ -10,7 +10,7 @@ public:
 
 	virtual void UpdateActor(float deltaTime) override;
 
-	void ProcessInput(const uint8_t* keyState) override;
+	void ProcessActorInput(const InputState& keyState) override;
 
 private:
 	MoveElement* moveElem;

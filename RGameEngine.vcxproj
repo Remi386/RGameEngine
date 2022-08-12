@@ -132,6 +132,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Input\InputState.cpp" />
+    <ClCompile Include="Input\InputSystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Math\mat3.cpp" />
     <ClCompile Include="Math\mat4.cpp" />
@@ -155,6 +157,8 @@
     <ClInclude Include="DebugLib\DebugOut.h" />
     <ClInclude Include="DebugLib\GL_Debug.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Input\InputState.h" />
+    <ClInclude Include="Input\InputSystem.h" />
     <ClInclude Include="Math\mat3.h" />
     <ClInclude Include="Math\mat4.h" />
     <ClInclude Include="Math\Math.h" />
@@ -183,6 +187,8 @@
     <None Include="GLSL\CommonShader.vert" />
     <None Include="GLSL\PhongShader.frag" />
     <None Include="GLSL\PhongShader.vert" />
+    <None Include="GLSL\SpriteShader.frag" />
+    <None Include="GLSL\SpriteShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

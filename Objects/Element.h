@@ -1,11 +1,12 @@
 #pragma once
 
 class GameActor;
+struct InputState;
 
 class Element {
 public:
 
-	enum class ElementID : int {
+	enum class ElementType : int {
 		MeshElement,
 		MoveElement
 	};
@@ -14,9 +15,11 @@ public:
 
 	virtual void Update(float deltaTime) {}
 
+	virtual void ProcessInput(const InputState& inputState) {}
+
 	int GetPriority() const { return priority; }
 
-	virtual ElementID GetType() const = 0;
+	virtual ElementType GetType() const = 0;
 
 protected:
 	GameActor* owner;

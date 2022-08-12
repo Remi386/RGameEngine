@@ -23,7 +23,7 @@ public:
 		w = w_;
 	}
 	
-	explicit inline quat(const vec3& axis, float angle)
+	explicit quat(const vec3& axis, float angle)
 	{
 		float sinus = Math::Sin(angle / 2);
 		x = axis.x * sinus;

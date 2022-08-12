@@ -31,6 +31,9 @@
     <Filter Include="Render">
       <UniqueIdentifier>{cc6c0ca3-19b7-445c-8141-8c1cd8f50cbd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{e9999803-79d2-4947-9cea-1c979955d8a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -89,6 +92,12 @@
     </ClCompile>
     <ClCompile Include="Math\quaternion.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\InputState.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\InputSystem.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +176,12 @@
     <ClInclude Include="Render\Texture.h">
       <Filter>Render</Filter>
     </ClInclude>
+    <ClInclude Include="Input\InputState.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\InputSystem.h">
+      <Filter>Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GLSL\CommonShader.vert">
@@ -179,6 +194,12 @@
       <Filter>GLSL</Filter>
     </None>
     <None Include="GLSL\PhongShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="GLSL\SpriteShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="GLSL\SpriteShader.vert">
       <Filter>GLSL</Filter>
     </None>
   </ItemGroup>

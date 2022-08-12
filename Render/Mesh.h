@@ -1,5 +1,4 @@
 #pragma once
-//#include "VertexArray.h"
 #include <string>
 
 class VertexArray;

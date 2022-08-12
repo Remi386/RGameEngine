@@ -119,3 +119,22 @@ VertexArray::VertexType VertexArray::GetVertexTypeByName(const std::string& Vert
 		return VertexType::Vert;
 	}
 }
+
+VertexArray* VertexArray::CreateSpriteVertexArray()
+{
+	float verts[] = {
+		-1.0f,  1.0f, 0.0f, 0.0f, 0.0f,
+		 1.0f,  1.0f, 0.0f, 1.0f, 0.0f,
+		 1.0f, -1.0f, 0.0f, 1.0f, 1.0f,
+		-1.0f, -1.0f, 0.0f, 0.0f, 1.0f 
+	};
+
+	unsigned int inds[] = {
+		0, 1, 2,
+		2, 3, 0
+	};
+
+	return new VertexArray(verts, sizeof(verts) / sizeof(float), 
+						   inds, sizeof(inds) / sizeof(uint32_t), 
+						   VertexType::Vert_Text);
+}

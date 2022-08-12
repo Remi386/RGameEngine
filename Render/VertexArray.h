@@ -14,6 +14,8 @@ public:
 	VertexArray(const void* vertData, uint32_t vertSize,
 				const uint32_t* indicesData, uint32_t indicesSize, VertexType vertType);
 
+	static VertexArray* CreateSpriteVertexArray();
+
 	~VertexArray();
 
 	void SetActive();

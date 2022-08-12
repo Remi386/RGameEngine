@@ -1,6 +1,5 @@
 #pragma once
 #include "../Objects/Element.h"
-//#include "Mesh.h"
 
 class Shader;
 class Mesh;
@@ -14,7 +13,7 @@ public:
 
 	void Draw(Shader* shader);
 
-	ElementID GetType() const { return ElementID::MeshElement; }
+	ElementType GetType() const { return ElementType::MeshElement; }
 
 	void SetVisible(bool visible_) { visible = false; }
 

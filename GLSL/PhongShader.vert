@@ -5,8 +5,8 @@ layout (location=1) in vec3 vNormal;
 layout (location=2) in vec2 vTex;
 
 uniform mat4 worldTransform;
-uniform mat4 view;
-uniform mat4 proj;
+uniform mat4 viewProjection;
+//uniform mat4 proj;
 
 out vec2 texCoor;
 // Normal and position of vertex in world space
@@ -20,7 +20,7 @@ void main(void)
     vertexPosition = pos.xyz;
     vertexNormal = (worldTransform * vec4(vNormal, 0.0)).xyz;
 
-    gl_Position = proj * view * pos;
+    gl_Position = viewProjection* pos;
 
     texCoor = vTex;
 }

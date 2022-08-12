@@ -1,11 +1,13 @@
 #pragma once
 #include "utils/Timer.h"
+#include "Input/InputSystem.h"
 #include <vector>
 #include <string_view>
 #include <unordered_map>
 
 class GameActor;
 class Renderer;
+class InputSystem;
 
 class Game {
 public:
@@ -20,6 +22,10 @@ public:
 	const StringMultiMap& GetSettings() { return settings; }
 
 	void Loop();
+
+	void AddGameActor(GameActor* actor);
+
+	void RemoveGameActor(GameActor* actor);
 
 	/// <summary>
 	/// Searching for file in resource folders, defined in ini file
@@ -36,5 +42,7 @@ private:
 	StringMultiMap settings;
 	std::vector<GameActor*> actors;
 	Renderer* renderer;
+	InputSystem inputSystem;
 	Timer timer;
+	bool isRunning = true;
 };

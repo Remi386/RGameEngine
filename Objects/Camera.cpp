@@ -11,36 +11,33 @@ void Camera::UpdateActor(float deltaTime)
 	vec3 cameraPos = GetPosition();
 	vec3 target = GetPosition() + GetForward() * 100;
 
-	//Debug::Out(rSPAM) << "camera position in look at matrix: " << cameraPos << std::endl;
-	//Debug::Out(rSPAM) << "Target vector in look at matrix: " << target << std::endl;
-
 	mat4 view = mat4::CreateLookAt(cameraPos, target, vec3::UnitY);
 	GetGame()->GetRenderer()->SetViewMatrix(view);
 }
 
-void Camera::ProcessInput(const uint8_t* keyState)
+void Camera::ProcessActorInput(const InputState& inputState)
 {
 	float forwardSpeed = 0.0f;
 	float angularSpeed = 0.0f;
 
-	if (keyState[SDL_SCANCODE_W])
+	if (inputState.keyboardState.GetKeyPressed(SDL_SCANCODE_W))
 	{
-		forwardSpeed += 10.0f;
+		forwardSpeed += 15.0f;
 		Debug::Out(rSPAM) << "Moved forward" << std::endl;
 	}
-	if (keyState[SDL_SCANCODE_S])
+	if (inputState.keyboardState.GetKeyPressed(SDL_SCANCODE_S))
 	{
-		forwardSpeed -= 10.0f;
+		forwardSpeed -= 15.0f;
 		Debug::Out(rSPAM) << "Moved back" << std::endl;
 	}
-	if (keyState[SDL_SCANCODE_A])
+	if (inputState.keyboardState.GetKeyPressed(SDL_SCANCODE_A))
 	{
-		angularSpeed -= Math::PI / 4;
+		angularSpeed -= Math::PI / 3;
 		Debug::Out(rSPAM) << "Moved Left" << std::endl;
 	}
-	if (keyState[SDL_SCANCODE_D])
+	if (inputState.keyboardState.GetKeyPressed(SDL_SCANCODE_D))
 	{
-		angularSpeed += Math::PI / 4;
+		angularSpeed += Math::PI / 3;
 		Debug::Out(rSPAM) << "Moved Right" << std::endl;
 	}
 

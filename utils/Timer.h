@@ -22,13 +22,13 @@ public:
 
 	void SetScale(float scale = 1.0) { time_scale = scale; }
 
-	bool WaitForFrameEnd();
+	bool IsFrameEnd();
 
 	float GetFrameDifference();
 
 	void UpdateTimer();
 
-	float GetAverage();
+	float GetFPS();
 
 	uint64_t GetTimePoint();
 

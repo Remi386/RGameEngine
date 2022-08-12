@@ -41,8 +41,9 @@ Renderer::Renderer(Game* game_, int ScreenWidth_, int ScreenHeight_)
 	// double buffering
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
+
 	sdlWindow = SDL_CreateWindow("Title", 50, 50, ScreenWidth_, 
-								 ScreenHeight_, SDL_WINDOW_OPENGL);
+								 ScreenHeight_, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 
 	if (!sdlWindow)
 	{
@@ -81,9 +82,8 @@ Renderer::Renderer(Game* game_, int ScreenWidth_, int ScreenHeight_)
 									  float(ScreenHeight_), 0.1f, 10000.f);
 
 	shader.SetActive();
-	shader.SetUniformMatrix4("viewProjection", projMat * viewMat);
 	
-	shader.SetUniformFloat("specularPower", 50.0f);
+	shader.SetUniformFloat("specularPower", 70.0f);
 	shader.SetUniformVector3("ambientLight", vec3(0.3f, 0.3f, 0.3f));
 
 	shader.SetUniformVector3("dirLight.lightDirection", vec3(-1.0f, -0.577f, 0.f));
@@ -92,7 +92,6 @@ Renderer::Renderer(Game* game_, int ScreenWidth_, int ScreenHeight_)
 	
 	shader.SetUniformVector3("cameraPosition", vec3(0.f, 0.f, 0.f));
 	
-	Debug::Out(rSPAM) << "viewProjection matrix seted up" << std::endl;
 }
 
 Mesh* Renderer::GetMesh(const std::string& meshName)
@@ -154,11 +153,10 @@ void Renderer::Draw()
 
 	vec3 cameraDirection = mat4::Inversed(viewMat).GetTranslation();
 	shader.SetUniformVector3("cameraPosition", cameraDirection);
-	shader.SetUniformMatrix4("view", viewMat);
-	shader.SetUniformMatrix4("proj", projMat);
+	shader.SetUniformMatrix4("viewProjection", viewMat * projMat);
 
 	DrawScene();
-
+	
 	SDL_GL_SwapWindow(sdlWindow);
 }
 
@@ -174,4 +172,15 @@ void Renderer::DrawScene()
 		mesh->Draw(&shader);
 	}
 
+}
+
+void Renderer::OnWindowResize(uint32_t newWidth, uint32_t newHeight)
+{
+	Debug::Out(rCOMMON) << "Window resized: width = " << newWidth 
+						<< ", height = " << newHeight << std::endl;
+
+	glViewport(0, 0, newWidth, newHeight);
+
+	projMat = mat4::CreatePerspective(Math::ToRadians(90.0f), float(newWidth),
+									  float(newHeight), 0.1f, 10000.f);
 }

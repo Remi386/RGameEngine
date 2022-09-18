@@ -12,7 +12,8 @@ bool Texture::Load(std::string_view fileName)
 										   &height, &channels, SOIL_LOAD_AUTO);
 
 	if (image == nullptr) {
-		Debug::Out(rCRITICAL) <<  "Failed to load texture: " << fileName << std::endl;
+		Debug::Out(rCRITICAL) << "Failed to load texture: " << fileName <<
+								 "\nReason: " << SOIL_last_result() << std::endl;
 		return false;
 	}
 

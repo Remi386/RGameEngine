@@ -1,6 +1,5 @@
 #pragma once
 #include "utils/Timer.h"
-#include "Input/InputSystem.h"
 #include <vector>
 #include <string_view>
 #include <unordered_map>
@@ -42,7 +41,7 @@ private:
 	StringMultiMap settings;
 	std::vector<GameActor*> actors;
 	Renderer* renderer;
-	InputSystem inputSystem;
+	InputSystem* inputSystem;
 	Timer timer;
 	bool isRunning = true;
 };

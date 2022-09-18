@@ -3,6 +3,7 @@
 #include "../Game.h"
 #include "../Render/Renderer.h"
 #include "../DebugLib/DebugOut.h"
+#include "../Input/InputState.h"
 
 void Camera::UpdateActor(float deltaTime)
 {

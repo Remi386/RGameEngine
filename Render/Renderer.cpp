@@ -40,7 +40,9 @@ Renderer::Renderer(Game* game_, int ScreenWidth_, int ScreenHeight_)
 	
 	// double buffering
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
+	
+	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
 
 	sdlWindow = SDL_CreateWindow("Title", 50, 50, ScreenWidth_, 
 								 ScreenHeight_, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
@@ -148,6 +150,8 @@ void Renderer::Draw()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
+
+	glEnable(GL_CULL_FACE);
 
 	shader.SetActive();
 

@@ -13,7 +13,13 @@ public:
 	
 	void SetForwardSpeed(float speed) { forwardSpeed = speed; };
 
+	void SetStrafeSpeed(float speed) { strafeSpeed = speed; };
+
+	void SetPitchSpeed(float speed) { pitchSpeed = speed; };
+
 private:
-	float angularSpeed = 0.0f;
 	float forwardSpeed = 0.0f;
+	float strafeSpeed = 0.0f;
+	float angularSpeed = 0.0f;
+	float pitchSpeed = 0.0f;
 };

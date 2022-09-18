@@ -3,9 +3,9 @@
 #include <GL/glew.h>
 #include "DebugOut.h"
 
-#ifdef DEBUG_BUILD
-
 namespace GLDebug {
+
+#ifdef DEBUG_BUILD
 
 	inline bool CheckOpenGLError()
 	{

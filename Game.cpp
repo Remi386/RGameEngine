@@ -10,6 +10,8 @@
 #include "Render/Renderer.h"
 #include "Objects/Camera.h"
 #include "Render/Mesh.h"
+#include "Cameras/FirstPersonCamera.h"
+#include "Input/InputSystem.h"
 
 Game::Game(std::string_view iniFile /* = game.ini*/)
 	:timer(Timer::FrameRate::FPS30)
@@ -27,6 +29,8 @@ Game::Game(std::string_view iniFile /* = game.ini*/)
 	}
 
 	renderer = new Renderer(this, ScreenWidth, ScreenHeight);
+	inputSystem = new InputSystem();
+	inputSystem->SetRelativeMod(true);
 
 	auto cubeActor = new TempActor(this);
 	MeshElement* mesh = new MeshElement(cubeActor);
@@ -40,10 +44,10 @@ Game::Game(std::string_view iniFile /* = game.ini*/)
 	rotation *= quat(vec3::UnitX, -Math::ToRadians(30.0));
 	cubeActor->SetRotation(rotation);
 
-	auto camera = new Camera(this);
+	auto camera = new FirstPersonCamera(this);
 	camera->SetPosition(vec3(0.0, 2.0, 0.0));
 
-	float wallSize = 20.0;
+	float wallSize = 50.0;
 
 	auto CreateWall = [this, wallSize](const std::string& meshName) {
 		TempActor* wall = new TempActor(this);
@@ -57,7 +61,7 @@ Game::Game(std::string_view iniFile /* = game.ini*/)
 	for (int i = -2; i < 2; ++i) {
 		for (int j = -2; j <= 2; j += 4) {
 			auto wall = CreateWall("Wall.rmesh");
-			wall->SetPosition(vec3(wallSize * i + wallSize / 2, 10.0, wallSize * j));
+			wall->SetPosition(vec3(wallSize * i + wallSize / 2, wallSize / 2, wallSize * j));
 		}
 	}
 
@@ -67,7 +71,7 @@ Game::Game(std::string_view iniFile /* = game.ini*/)
 	for (int i = -2; i <= 2; i += 4) {
 		for (int j = -2; j < 2; j++) {
 			auto wall = CreateWall("Wall.rmesh");
-			wall->SetPosition(vec3(wallSize * i, 10.0, wallSize * j + wallSize / 2));
+			wall->SetPosition(vec3(wallSize * i, wallSize / 2, wallSize * j + wallSize / 2));
 			wall->SetRotation(WallRotation);
 		}
 	}
@@ -115,7 +119,7 @@ void Game::Loop()
 void Game::ProcessInput()
 {
 
-	inputSystem.PreUpdate();
+	inputSystem->PreUpdate();
 
 	SDL_Event even;
 	while (SDL_PollEvent(&even)) {
@@ -126,7 +130,7 @@ void Game::ProcessInput()
 			isRunning = false;
 			break;
 		case SDL_MOUSEWHEEL:
-			inputSystem.ProcessEvent(even);
+			inputSystem->ProcessEvent(even);
 		case SDL_WINDOWEVENT:
 			if(even.window.event == SDL_WINDOWEVENT_RESIZED)
 				renderer->OnWindowResize(even.window.data1, even.window.data2);
@@ -135,9 +139,9 @@ void Game::ProcessInput()
 			break;
 		}
 	}
-	inputSystem.Update();
+	inputSystem->Update();
 
-	InputState& inputState = inputSystem.GetInputState();
+	InputState& inputState = inputSystem->GetInputState();
 
 	for (auto actor : actors) {
 		actor->ProcessInput(inputState);

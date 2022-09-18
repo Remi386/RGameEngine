@@ -8,6 +8,21 @@ MoveElement::MoveElement(GameActor* owner, int priority /* = 50*/)
 
 void MoveElement::Update(float deltaTime)
 {
+
+	if (!Math::IsZero(forwardSpeed))
+	{
+		vec3 pos = owner->GetPosition();
+		pos += owner->GetForward() * forwardSpeed * deltaTime;
+		owner->SetPosition(pos);
+	}
+
+	if (!Math::IsZero(strafeSpeed))
+	{
+		vec3 pos = owner->GetPosition();
+		pos += owner->GetRight() * strafeSpeed * deltaTime;
+		owner->SetPosition(pos);
+	}
+
 	if (!Math::IsZero(angularSpeed)) {
 		quat rot = owner->GetRotation();
 
@@ -18,10 +33,13 @@ void MoveElement::Update(float deltaTime)
 		owner->SetRotation(rot);
 	}
 
-	if (!Math::IsZero(forwardSpeed))
-	{
-		vec3 pos = owner->GetPosition();
-		pos += owner->GetForward() * forwardSpeed * deltaTime;
-		owner->SetPosition(pos);
+	if (!Math::IsZero(pitchSpeed)) {
+		quat rot = owner->GetRotation();
+
+		float angle = pitchSpeed * deltaTime;
+		quat inc(vec3::UnitX, angle);
+		
+		rot *= inc;
+		owner->SetRotation(rot);
 	}
 }

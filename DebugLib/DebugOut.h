@@ -106,7 +106,7 @@ public:
 	}
 
 	static void Assert(bool condition, DebugLVL VerboseLevel,
-					   string_view message, const std::string& StreamName = "",
+					   std::string_view message, const std::string& StreamName = "",
 					   int error_code = 0)
 	{}
 

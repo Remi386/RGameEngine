@@ -62,12 +62,22 @@ public:
 
 	friend mat4 operator*(const mat4& lhs, const mat4& rhs);
 
-	friend mat4 operator*(const mat4& lhs, const mat4& rhs);
-
 	mat4& operator*=(const mat4& other)
 	{
 		*this = *this * other;
 		return *this;
+	}
+
+	static mat4 CreateEmptyMatrix()
+	{
+		float mat[4][4] =
+		{
+			{ 0.0f, 0.0f, 0.0f, 0.0f },
+			{ 0.0f, 0.0f, 0.0f, 0.0f },
+			{ 0.0f, 0.0f, 0.0f, 0.0f },
+			{ 0.0f, 0.0f, 0.0f, 0.0f },
+		};
+		return mat4(mat);
 	}
 
 	vec3 GetTranslation()
@@ -162,10 +172,10 @@ public:
 		float xScale = yScale * height / width;
 		float mat[4][4] =
 		{
-			{ xScale, 0.0f,   0.0f,                                  0.0f },
-			{ 0.0f,   yScale, 0.0f,                                  0.0f },
-			{ 0.0f,   0.0f,   (far + near) / (far - near),             1.0f },
-			{ 0.0f,   0.0f,   -(2 * near * far) / (far - near),        0.0f }
+			{ xScale, 0.0f,   0.0f,                     0.0f },
+			{ 0.0f,   yScale, 0.0f,                     0.0f },
+			{ 0.0f,   0.0f,   (far+near)/(far-near),    1.0f },
+			{ 0.0f,   0.0f,   -(2*near*far)/(far-near), 0.0f }
 		};
 		return mat4(mat);
 	}

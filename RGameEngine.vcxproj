@@ -131,6 +131,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cameras\CameraBase.cpp" />
+    <ClCompile Include="Cameras\FirstPersonCamera.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Input\InputState.cpp" />
     <ClCompile Include="Input\InputSystem.cpp" />
@@ -154,6 +156,8 @@
     <ClCompile Include="utils\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cameras\CameraBase.h" />
+    <ClInclude Include="Cameras\FirstPersonCamera.h" />
     <ClInclude Include="DebugLib\DebugOut.h" />
     <ClInclude Include="DebugLib\GL_Debug.h" />
     <ClInclude Include="Game.h" />

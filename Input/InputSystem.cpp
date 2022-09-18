@@ -38,3 +38,9 @@ void InputSystem::ProcessEvent(SDL_Event sdlEvent)
 		break;
 	}
 }
+
+void InputSystem::SetRelativeMod(bool relative)
+{ 
+	inputState.mouseState.isRelative = relative;
+	SDL_SetRelativeMouseMode((SDL_bool)relative);
+}

@@ -18,6 +18,8 @@ public:
 
 	void ProcessEvent(SDL_Event sdlEvent);
 
+	void SetRelativeMod(bool relative);
+
 private:
 	InputState inputState;
 };

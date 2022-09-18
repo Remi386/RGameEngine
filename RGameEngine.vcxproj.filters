@@ -34,6 +34,9 @@
     <Filter Include="Input">
       <UniqueIdentifier>{e9999803-79d2-4947-9cea-1c979955d8a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Cameras">
+      <UniqueIdentifier>{b109008f-6e59-45a5-b035-5534a94f23d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -97,7 +100,13 @@
       <Filter>Input</Filter>
     </ClCompile>
     <ClCompile Include="Input\InputSystem.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Cameras\FirstPersonCamera.cpp">
+      <Filter>Cameras</Filter>
+    </ClCompile>
+    <ClCompile Include="Cameras\CameraBase.cpp">
+      <Filter>Cameras</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +190,12 @@
     </ClInclude>
     <ClInclude Include="Input\InputSystem.h">
       <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Cameras\FirstPersonCamera.h">
+      <Filter>Cameras</Filter>
+    </ClInclude>
+    <ClInclude Include="Cameras\CameraBase.h">
+      <Filter>Cameras</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

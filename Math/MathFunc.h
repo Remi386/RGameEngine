@@ -73,4 +73,9 @@ namespace Math {
 	{
 		return start + timePoint * (end - start);
 	}
+
+	constexpr float Clamp(float min, float max, float value)
+	{
+		return min > value ? min : max < value ? max : value;
+	}
 }

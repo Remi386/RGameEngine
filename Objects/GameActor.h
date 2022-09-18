@@ -2,6 +2,7 @@
 #include <vector>
 #include "../Math/quaternion.h"
 #include "../Math/vec3.h"
+#include "../Math/mat4.h"
 #include "Element.h"
 #include "../utils/PriorityVector.h"
 
@@ -44,6 +45,10 @@ public:
 	vec3 GetPosition() const { return position; }
 
 	vec3 GetForward() const { return vec3::Transform(vec3::UnitZ, rotation); }
+
+	vec3 GetRight() const { return vec3::Transform(vec3::UnitX, rotation); }
+
+	vec3 GetUp() const { return vec3::Transform(vec3::UnitY, rotation); }
 
 private:
 
